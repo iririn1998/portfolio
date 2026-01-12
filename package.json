@@ -6,8 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "lint": "oxlint --tsconfig ./tsconfig.json --type-aware ./src",
+    "lint:fix": "oxlint --type-aware --type-check --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "dependencies": {
     "next": "16.1.1",
@@ -19,7 +21,9 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "babel-plugin-react-compiler": "1.0.0",
+    "oxfmt": "^0.23.0",
     "oxlint": "^1.38.0",
+    "oxlint-tsgolint": "^0.11.0",
     "typescript": "^5"
   },
   "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
