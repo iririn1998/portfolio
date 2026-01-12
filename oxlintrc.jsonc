@@ -10,11 +10,11 @@
       {
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
-        "caughtErrorsIgnorePattern": "^_"
-      }
+        "caughtErrorsIgnorePattern": "^_",
+      },
     ],
     "typescript/no-floating-promises": "error",
     "typescript/no-namespace": "off",
-    "import/no-cycle": "error"
-  }
+    "import/no-cycle": "error",
+  },
 }

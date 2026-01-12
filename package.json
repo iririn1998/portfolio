@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "oxlint --tsconfig ./tsconfig.json --type-aware ./src",
-    "lint:fix": "oxlint --type-aware --type-check --fix",
+    "lint:fix": "oxlint --tsconfig ./tsconfig.json --type-aware ./src --fix",
     "format": "oxfmt",
     "format:check": "oxfmt --check"
   },
