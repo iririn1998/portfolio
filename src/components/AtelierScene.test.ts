@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import * as THREE from "three";
-import { VIEW_PRESETS } from "../constants";
+import { HOTSPOTS, VIEW_PRESETS } from "../constants";
+import { getPresetFromObject } from "../utils";
 
 describe("Camera & Preset Validation", () => {
   it("should define all expected presets with valid coordinates", () => {
@@ -94,5 +95,49 @@ describe("Camera & Preset Validation", () => {
     expect(isTransitioning).toBe(false);
     expect(controlsTarget.distanceTo(desiredTarget)).toBe(0);
     expect(cameraPos.distanceTo(desiredPos)).toBe(0);
+  });
+});
+
+describe("Hotspots & Object Click Detection", () => {
+  it("should define valid hotspots corresponding to presets", () => {
+    expect(HOTSPOTS.length).toBe(3);
+    const validPresetIds = ["desk", "bookshelf", "window"];
+
+    for (const spot of HOTSPOTS) {
+      expect(validPresetIds).toContain(spot.id);
+      expect(spot.label).toBeTruthy();
+      expect(spot.icon).toBeTruthy();
+      expect(spot.position).toHaveLength(3);
+    }
+  });
+
+  it("should correctly resolve presets from object and hierarchy names", () => {
+    const root = new THREE.Group();
+    root.name = "Scene";
+
+    const deskParent = new THREE.Group();
+    deskParent.name = "Desk";
+    root.add(deskParent);
+
+    const monitorMesh = new THREE.Mesh();
+    monitorMesh.name = "Monitor display";
+    deskParent.add(monitorMesh);
+
+    const bookshelfMesh = new THREE.Mesh();
+    bookshelfMesh.name = "Bookcase shelf";
+    root.add(bookshelfMesh);
+
+    const plantLeaf = new THREE.Mesh();
+    plantLeaf.name = "Leaf 0";
+    root.add(plantLeaf);
+
+    const randomMesh = new THREE.Mesh();
+    randomMesh.name = "Unknown floor plank";
+    root.add(randomMesh);
+
+    expect(getPresetFromObject(monitorMesh)).toBe("desk");
+    expect(getPresetFromObject(bookshelfMesh)).toBe("bookshelf");
+    expect(getPresetFromObject(plantLeaf)).toBe("window");
+    expect(getPresetFromObject(randomMesh)).toBeNull();
   });
 });
