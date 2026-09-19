@@ -7,10 +7,9 @@ import { getPresetFromObject } from "../utils";
 
 type AtelierModelProps = {
   onSelectPreset?: (preset: ViewPreset) => void;
-  onHoverPreset?: (preset: Exclude<ViewPreset, "overview"> | null) => void;
 };
 
-export const AtelierModel = ({ onSelectPreset, onHoverPreset }: AtelierModelProps) => {
+export const AtelierModel = ({ onSelectPreset }: AtelierModelProps) => {
   const { scene } = useGLTF("/atelier.glb");
 
   const clonedScene = useMemo(() => {
@@ -45,22 +44,6 @@ export const AtelierModel = ({ onSelectPreset, onHoverPreset }: AtelierModelProp
         if (preset && onSelectPreset) {
           e.stopPropagation();
           onSelectPreset(preset);
-        }
-      }}
-      onPointerOver={(e: ThreeEvent<PointerEvent>) => {
-        const preset = getPresetFromObject(e.object);
-        if (preset) {
-          e.stopPropagation();
-          document.body.style.cursor = "pointer";
-          if (preset !== "overview" && onHoverPreset) {
-            onHoverPreset(preset);
-          }
-        }
-      }}
-      onPointerOut={() => {
-        document.body.style.cursor = "default";
-        if (onHoverPreset) {
-          onHoverPreset(null);
         }
       }}
     />

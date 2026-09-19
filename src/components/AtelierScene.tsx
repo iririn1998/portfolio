@@ -158,7 +158,7 @@ export const AtelierScene = ({
 
         <Suspense fallback={null}>
           <group position={[0, 0, 0]}>
-            <AtelierModel onSelectPreset={onSelectPreset} onHoverPreset={onHoverPreset} />
+            <AtelierModel onSelectPreset={onSelectPreset} />
           </group>
 
           {/* 3D Clickable Hotspots */}
