@@ -3,7 +3,7 @@ import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { OrbitControls as OrbitControlsImpl } from "three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "three";
-import type { ViewConfig, ViewPreset } from "../types";
+import type { ScreenPosition, ViewConfig, ViewPreset } from "../types";
 import { AtelierModel } from "./AtelierModel";
 import { Hotspots } from "./Hotspots";
 
@@ -86,14 +86,20 @@ type AtelierSceneProps = {
   activeView: ViewConfig;
   autoRotate: boolean;
   transitionCount: number;
+  hoveredPreset: Exclude<ViewPreset, "overview"> | null;
   onSelectPreset: (preset: ViewPreset) => void;
+  onHoverPreset: (preset: Exclude<ViewPreset, "overview"> | null) => void;
+  onUpdateMarkerPos: (pos: ScreenPosition | null) => void;
 };
 
 export const AtelierScene = ({
   activeView,
   autoRotate,
   transitionCount,
+  hoveredPreset,
   onSelectPreset,
+  onHoverPreset,
+  onUpdateMarkerPos,
 }: AtelierSceneProps) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const initialTarget = useRef(activeView.target).current;
@@ -152,11 +158,17 @@ export const AtelierScene = ({
 
         <Suspense fallback={null}>
           <group position={[0, 0, 0]}>
-            <AtelierModel onSelectPreset={onSelectPreset} />
+            <AtelierModel onSelectPreset={onSelectPreset} onHoverPreset={onHoverPreset} />
           </group>
 
           {/* 3D Clickable Hotspots */}
-          <Hotspots currentPreset={activeView.id} onSelectPreset={onSelectPreset} />
+          <Hotspots
+            currentPreset={activeView.id}
+            hoveredPreset={hoveredPreset}
+            onSelectPreset={onSelectPreset}
+            onHoverPreset={onHoverPreset}
+            onUpdateMarkerPos={onUpdateMarkerPos}
+          />
 
           {/* Contact shadow right under the diorama plinth */}
           <ContactShadows
