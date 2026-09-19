@@ -58,6 +58,10 @@ export const UIOverlay = ({
 
       <div className="hint-overlay glass-card">
         <div className="hint-item">
+          <span className="hint-icon">📍</span>
+          <span>ピン/家具: クリックでズーム</span>
+        </div>
+        <div className="hint-item">
           <span className="hint-icon">🖱️</span>
           <span>ドラッグ: 回転</span>
         </div>

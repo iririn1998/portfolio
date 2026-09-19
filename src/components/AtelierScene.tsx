@@ -3,8 +3,9 @@ import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { OrbitControls as OrbitControlsImpl } from "three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "three";
-import type { ViewConfig } from "../types";
+import type { ViewConfig, ViewPreset } from "../types";
 import { AtelierModel } from "./AtelierModel";
+import { Hotspots } from "./Hotspots";
 
 type CameraAnimatorProps = {
   activeView: ViewConfig;
@@ -85,9 +86,15 @@ type AtelierSceneProps = {
   activeView: ViewConfig;
   autoRotate: boolean;
   transitionCount: number;
+  onSelectPreset: (preset: ViewPreset) => void;
 };
 
-export const AtelierScene = ({ activeView, autoRotate, transitionCount }: AtelierSceneProps) => {
+export const AtelierScene = ({
+  activeView,
+  autoRotate,
+  transitionCount,
+  onSelectPreset,
+}: AtelierSceneProps) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const initialTarget = useRef(activeView.target).current;
 
@@ -145,8 +152,11 @@ export const AtelierScene = ({ activeView, autoRotate, transitionCount }: Atelie
 
         <Suspense fallback={null}>
           <group position={[0, 0, 0]}>
-            <AtelierModel />
+            <AtelierModel onSelectPreset={onSelectPreset} />
           </group>
+
+          {/* 3D Clickable Hotspots */}
+          <Hotspots currentPreset={activeView.id} onSelectPreset={onSelectPreset} />
 
           {/* Contact shadow right under the diorama plinth */}
           <ContactShadows

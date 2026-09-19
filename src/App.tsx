@@ -33,6 +33,7 @@ const App = () => {
         activeView={activeView}
         autoRotate={autoRotate}
         transitionCount={transitionCount}
+        onSelectPreset={handleSelectPreset}
       />
       <UIOverlay
         currentPreset={currentPreset}
