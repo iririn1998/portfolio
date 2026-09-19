@@ -1,29 +1,24 @@
 import { useEffect, useRef } from "react";
-import type { HotspotConfig, ScreenPosition, ViewPreset } from "../types";
+import type { CardInfo, ScreenPosition, ViewPreset } from "../types";
 
 type InfoCardProps = {
-  hotspot: HotspotConfig | null;
-  visible: boolean;
+  cardInfo: CardInfo;
+  currentPreset: ViewPreset;
+  showConnector: boolean;
   onSelectPreset: (preset: ViewPreset) => void;
-  onHoverCard: (isHovering: boolean) => void;
   onAnchorPosChange: (pos: ScreenPosition | null) => void;
 };
 
 export const InfoCard = ({
-  hotspot,
-  visible,
+  cardInfo,
+  currentPreset,
+  showConnector,
   onSelectPreset,
-  onHoverCard,
   onAnchorPosChange,
 }: InfoCardProps) => {
   const anchorRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (!visible || !hotspot) {
-      onAnchorPosChange(null);
-      return;
-    }
-
     const updateAnchor = () => {
       if (anchorRef.current) {
         const rect = anchorRef.current.getBoundingClientRect();
@@ -39,38 +34,46 @@ export const InfoCard = ({
     return () => {
       window.removeEventListener("resize", updateAnchor);
     };
-  }, [visible, hotspot, onAnchorPosChange]);
+  }, [onAnchorPosChange]);
+
+  const isCurrentView = currentPreset === cardInfo.id;
+  const isOverview = cardInfo.id === "overview";
 
   return (
     <aside
-      className={`info-card glass-card ${visible && hotspot ? "is-active" : ""}`}
-      onMouseEnter={() => onHoverCard(true)}
-      onMouseLeave={() => onHoverCard(false)}
-      aria-label={hotspot ? `${hotspot.label}の詳細情報` : undefined}
+      className="info-card glass-card is-always-visible"
+      aria-label={`${cardInfo.label}の詳細情報`}
     >
       {/* Anchor point where connector dashed line attaches */}
-      <span ref={anchorRef} className="info-card-anchor" />
+      <span ref={anchorRef} className={`info-card-anchor ${showConnector ? "is-active" : ""}`} />
 
-      {hotspot && (
-        <div className="info-card-content">
-          <div className="info-card-header">
-            <span className="info-card-icon">{hotspot.icon}</span>
-            <div className="info-card-title-group">
-              <h2 className="info-card-title">{hotspot.label}</h2>
-              <span className="info-card-sub">{hotspot.subLabel}</span>
-            </div>
+      <div className="info-card-content">
+        <div className="info-card-header">
+          <span className="info-card-icon">{cardInfo.icon}</span>
+          <div className="info-card-title-group">
+            <h2 className="info-card-title">{cardInfo.label}</h2>
+            <span className="info-card-sub">{cardInfo.subLabel}</span>
           </div>
-          <p className="info-card-desc">{hotspot.description}</p>
+        </div>
+
+        <p className="info-card-desc">{cardInfo.description}</p>
+
+        {isOverview ? (
+          <div className="info-card-guide">
+            <span className="info-card-guide-dot" />
+            <span>空間内のピンにカーソルを合わせて探索</span>
+          </div>
+        ) : (
           <button
             type="button"
-            className="info-card-zoom-btn"
-            onClick={() => onSelectPreset(hotspot.id)}
+            className={`info-card-zoom-btn ${isCurrentView ? "is-current" : ""}`}
+            onClick={() => onSelectPreset(cardInfo.id)}
           >
-            <span>視点をフォーカス</span>
-            <span className="info-card-btn-arrow">→</span>
+            <span>{isCurrentView ? "現在のフォーカス視点" : "視点をフォーカス"}</span>
+            <span className="info-card-btn-arrow">{isCurrentView ? "✓" : "→"}</span>
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </aside>
   );
 };

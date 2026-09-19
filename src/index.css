@@ -387,7 +387,7 @@ body,
   line-height: 1;
 }
 
-/* Bottom-Left Information Card */
+/* Bottom-Left Information Card (Always Visible) */
 .info-card {
   position: absolute;
   bottom: 84px;
@@ -396,18 +396,12 @@ body,
   width: 290px;
   max-width: calc(100vw - 48px);
   padding: 18px 20px;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(14px) scale(0.96);
-  transition:
-    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.info-card.is-active {
-  opacity: 1;
   pointer-events: auto;
-  transform: translateY(0) scale(1);
+  opacity: 1;
+  transform: none;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .info-card-anchor {
@@ -417,9 +411,18 @@ body,
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
+  background: rgba(210, 140, 90, 0.4);
+  box-shadow: 0 0 4px rgba(210, 140, 90, 0.3);
   pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.info-card-anchor.is-active {
+  background: var(--accent);
+  box-shadow:
+    0 0 10px var(--accent),
+    0 0 2px var(--accent);
+  transform: scale(1.25);
 }
 
 .info-card-content {
@@ -473,6 +476,27 @@ body,
   line-height: 1.6;
   color: #555b55;
   margin: 0;
+  min-height: 40px;
+}
+
+.info-card-guide {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.info-card-guide-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  animation: dot-pulse 1.8s ease-in-out infinite alternate;
 }
 
 .info-card-zoom-btn {
@@ -498,12 +522,24 @@ body,
   transform: translateY(-1px);
 }
 
+.info-card-zoom-btn.is-current {
+  background: rgba(45, 49, 46, 0.08);
+  color: var(--text-primary);
+  cursor: default;
+}
+
+.info-card-zoom-btn.is-current:hover {
+  background: rgba(45, 49, 46, 0.08);
+  box-shadow: none;
+  transform: none;
+}
+
 .info-card-btn-arrow {
   font-size: 14px;
   transition: transform 0.2s ease;
 }
 
-.info-card-zoom-btn:hover .info-card-btn-arrow {
+.info-card-zoom-btn:hover:not(.is-current) .info-card-btn-arrow {
   transform: translateX(3px);
 }
 
