@@ -1,29 +1,29 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import { AtelierScene } from "./components/AtelierScene";
 import { ConnectorLine } from "./components/ConnectorLine";
 import { InfoCard } from "./components/InfoCard";
 import { LoadingScreen } from "./components/LoadingScreen";
 import { UIOverlay } from "./components/UIOverlay";
-import { HOTSPOTS, VIEW_PRESETS } from "./constants";
+import { CARD_INFOS, VIEW_PRESETS } from "./constants";
 import type { ScreenPosition, ViewPreset } from "./types";
 
 const App = () => {
   const [currentPreset, setCurrentPreset] = useState<ViewPreset>("overview");
+  const [cardPreset, setCardPreset] = useState<ViewPreset>("overview");
   const [autoRotate, setAutoRotate] = useState(false);
   const [transitionCount, setTransitionCount] = useState(0);
 
-  // Hover state for 3D hotspots / objects
+  // Hover state only for 3D marker pins
   const [hoveredPreset, setHoveredPreset] = useState<Exclude<ViewPreset, "overview"> | null>(null);
   const [markerScreenPos, setMarkerScreenPos] = useState<ScreenPosition | null>(null);
   const [cardAnchorPos, setCardAnchorPos] = useState<ScreenPosition | null>(null);
-  const [isHoveringCard, setIsHoveringCard] = useState(false);
-  const unhoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const activeView = VIEW_PRESETS.find((v) => v.id === currentPreset) ?? VIEW_PRESETS[0];
-  const activeHotspot = HOTSPOTS.find((h) => h.id === hoveredPreset) ?? null;
+  const activeCardInfo = CARD_INFOS[cardPreset] ?? CARD_INFOS.overview;
 
   const handleSelectPreset = useCallback((preset: ViewPreset) => {
     setCurrentPreset(preset);
+    setCardPreset(preset);
     setTransitionCount((prev) => prev + 1);
     setHoveredPreset(null);
   }, []);
@@ -34,39 +34,16 @@ const App = () => {
 
   const handleReset = useCallback(() => {
     setCurrentPreset("overview");
+    setCardPreset("overview");
     setTransitionCount((prev) => prev + 1);
     setHoveredPreset(null);
   }, []);
 
-  const handleHoverPreset = useCallback(
-    (preset: Exclude<ViewPreset, "overview"> | null) => {
-      if (unhoverTimerRef.current) {
-        clearTimeout(unhoverTimerRef.current);
-        unhoverTimerRef.current = null;
-      }
-
-      if (preset) {
-        setHoveredPreset(preset);
-      } else {
-        unhoverTimerRef.current = setTimeout(() => {
-          if (!isHoveringCard) {
-            setHoveredPreset(null);
-          }
-        }, 250);
-      }
-    },
-    [isHoveringCard],
-  );
-
-  const handleHoverCard = useCallback((hovering: boolean) => {
-    setIsHoveringCard(hovering);
-    if (!hovering) {
-      unhoverTimerRef.current = setTimeout(() => {
-        setHoveredPreset(null);
-      }, 250);
-    } else if (unhoverTimerRef.current) {
-      clearTimeout(unhoverTimerRef.current);
-      unhoverTimerRef.current = null;
+  // Update card and line ONLY when hovering over 3D markers
+  const handleHoverMarker = useCallback((preset: Exclude<ViewPreset, "overview"> | null) => {
+    setHoveredPreset(preset);
+    if (preset) {
+      setCardPreset(preset);
     }
   }, []);
 
@@ -87,23 +64,23 @@ const App = () => {
         transitionCount={transitionCount}
         hoveredPreset={hoveredPreset}
         onSelectPreset={handleSelectPreset}
-        onHoverPreset={handleHoverPreset}
+        onHoverPreset={handleHoverMarker}
         onUpdateMarkerPos={handleUpdateMarkerPos}
       />
 
-      {/* Dashed connector line between card anchor and 3D marker */}
+      {/* Dashed connector line between card anchor and hovered 3D marker */}
       <ConnectorLine
         startPos={cardAnchorPos}
         endPos={markerScreenPos}
-        visible={Boolean(hoveredPreset && activeHotspot)}
+        visible={Boolean(hoveredPreset)}
       />
 
-      {/* Info card in bottom-left */}
+      {/* Bottom-left information card: always visible */}
       <InfoCard
-        hotspot={activeHotspot}
-        visible={Boolean(hoveredPreset && activeHotspot)}
+        cardInfo={activeCardInfo}
+        currentPreset={currentPreset}
+        showConnector={Boolean(hoveredPreset)}
         onSelectPreset={handleSelectPreset}
-        onHoverCard={handleHoverCard}
         onAnchorPosChange={handleAnchorPosChange}
       />
 
