@@ -411,17 +411,17 @@ body,
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(210, 140, 90, 0.4);
-  box-shadow: 0 0 4px rgba(210, 140, 90, 0.3);
+  background: rgba(30, 34, 31, 0.2);
+  box-shadow: 0 0 3px rgba(30, 34, 31, 0.15);
   pointer-events: none;
   transition: all 0.3s ease;
 }
 
 .info-card-anchor.is-active {
-  background: var(--accent);
+  background: #1e221f;
   box-shadow:
-    0 0 10px var(--accent),
-    0 0 2px var(--accent);
+    0 0 8px rgba(30, 34, 31, 0.4),
+    0 0 2px #1e221f;
   transform: scale(1.25);
 }
 
@@ -556,34 +556,36 @@ body,
 
 .connector-path {
   fill: none;
-  stroke: var(--accent);
-  stroke-width: 1.75;
-  stroke-dasharray: 5 4;
+  stroke: #1e221f;
+  stroke-width: 2.6;
+  stroke-dasharray: 6 5;
   stroke-linecap: round;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.12));
-  animation: connector-dash 1.2s linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(255, 255, 255, 0.7));
+  animation: connector-dash 1.3s linear infinite;
 }
 
 @keyframes connector-dash {
   to {
-    stroke-dashoffset: -18;
+    stroke-dashoffset: -22;
   }
 }
 
 .connector-anchor-dot {
-  fill: var(--accent);
-  filter: drop-shadow(0 0 4px var(--accent));
+  fill: #1e221f;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.25));
 }
 
 .connector-target-ring {
-  fill: rgba(255, 255, 255, 0.7);
-  stroke: var(--accent);
-  stroke-width: 1.5;
-  filter: drop-shadow(0 0 6px var(--accent));
+  fill: rgba(255, 255, 255, 0.9);
+  stroke: #1e221f;
+  stroke-width: 2;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
 }
 
 .connector-target-dot {
-  fill: var(--accent);
+  fill: #1e221f;
 }
 
 @media (max-width: 768px) {
