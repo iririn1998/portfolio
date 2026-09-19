@@ -6,3 +6,11 @@ export type ViewConfig = {
   position: [number, number, number];
   target: [number, number, number];
 };
+
+export type HotspotConfig = {
+  id: Exclude<ViewPreset, "overview">;
+  label: string;
+  subLabel: string;
+  icon: string;
+  position: [number, number, number];
+};

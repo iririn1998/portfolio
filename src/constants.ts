@@ -1,4 +1,4 @@
-import type { ViewConfig } from "./types";
+import type { HotspotConfig, ViewConfig } from "./types";
 
 export const VIEW_PRESETS: ViewConfig[] = [
   {
@@ -24,5 +24,29 @@ export const VIEW_PRESETS: ViewConfig[] = [
     label: "窓辺・植物 (Window)",
     position: [2.4, 2.1, 2.3],
     target: [-0.8, 0.85, 0.3],
+  },
+];
+
+export const HOTSPOTS: HotspotConfig[] = [
+  {
+    id: "desk",
+    label: "デスク",
+    subLabel: "Workspace",
+    icon: "💻",
+    position: [0.3, 1.85, -0.65],
+  },
+  {
+    id: "bookshelf",
+    label: "本棚",
+    subLabel: "Library",
+    icon: "📚",
+    position: [-1.45, 1.45, -0.1],
+  },
+  {
+    id: "window",
+    label: "観葉植物",
+    subLabel: "Greenery",
+    icon: "🪴",
+    position: [-1.05, 1.15, 1.05],
   },
 ];
