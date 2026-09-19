@@ -7,6 +7,14 @@ export type ViewConfig = {
   target: [number, number, number];
 };
 
+export type CardInfo = {
+  id: ViewPreset;
+  label: string;
+  subLabel: string;
+  icon: string;
+  description: string;
+};
+
 export type HotspotConfig = {
   id: Exclude<ViewPreset, "overview">;
   label: string;
