@@ -12,5 +12,11 @@ export type HotspotConfig = {
   label: string;
   subLabel: string;
   icon: string;
+  description: string;
   position: [number, number, number];
+};
+
+export type ScreenPosition = {
+  x: number;
+  y: number;
 };

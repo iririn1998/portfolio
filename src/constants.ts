@@ -33,6 +33,8 @@ export const HOTSPOTS: HotspotConfig[] = [
     label: "デスク",
     subLabel: "Workspace",
     icon: "💻",
+    description:
+      "デュアル環境とエルゴノミクス設計のデスク。コード設計やデザイン制作を行うメイン作業環境です。",
     position: [0.3, 1.85, -0.65],
   },
   {
@@ -40,6 +42,8 @@ export const HOTSPOTS: HotspotConfig[] = [
     label: "本棚",
     subLabel: "Library",
     icon: "📚",
+    description:
+      "デザイン書・技術書・アートブックが並ぶ本棚。アイデアや知見をストックするインスピレーションの源です。",
     position: [-1.45, 1.45, -0.1],
   },
   {
@@ -47,6 +51,8 @@ export const HOTSPOTS: HotspotConfig[] = [
     label: "観葉植物",
     subLabel: "Greenery",
     icon: "🪴",
+    description:
+      "柔らかな自然光が差し込むアトリエの窓辺。観葉植物がデスク周りに安らぎと心地よい集中をもたらします。",
     position: [-1.05, 1.15, 1.05],
   },
 ];
