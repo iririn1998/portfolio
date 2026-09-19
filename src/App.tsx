@@ -10,7 +10,6 @@ import type { ScreenPosition, ViewPreset } from "./types";
 const App = () => {
   const [currentPreset, setCurrentPreset] = useState<ViewPreset>("overview");
   const [cardPreset, setCardPreset] = useState<ViewPreset>("overview");
-  const [autoRotate, setAutoRotate] = useState(false);
   const [transitionCount, setTransitionCount] = useState(0);
 
   // Hover state only for 3D marker pins
@@ -24,17 +23,6 @@ const App = () => {
   const handleSelectPreset = useCallback((preset: ViewPreset) => {
     setCurrentPreset(preset);
     setCardPreset(preset);
-    setTransitionCount((prev) => prev + 1);
-    setHoveredPreset(null);
-  }, []);
-
-  const handleToggleAutoRotate = useCallback(() => {
-    setAutoRotate((prev) => !prev);
-  }, []);
-
-  const handleReset = useCallback(() => {
-    setCurrentPreset("overview");
-    setCardPreset("overview");
     setTransitionCount((prev) => prev + 1);
     setHoveredPreset(null);
   }, []);
@@ -60,7 +48,6 @@ const App = () => {
       <LoadingScreen />
       <AtelierScene
         activeView={activeView}
-        autoRotate={autoRotate}
         transitionCount={transitionCount}
         hoveredPreset={hoveredPreset}
         onSelectPreset={handleSelectPreset}
@@ -84,13 +71,7 @@ const App = () => {
         onAnchorPosChange={handleAnchorPosChange}
       />
 
-      <UIOverlay
-        currentPreset={currentPreset}
-        onSelectPreset={handleSelectPreset}
-        autoRotate={autoRotate}
-        onToggleAutoRotate={handleToggleAutoRotate}
-        onReset={handleReset}
-      />
+      <UIOverlay currentPreset={currentPreset} onSelectPreset={handleSelectPreset} />
     </main>
   );
 };

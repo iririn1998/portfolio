@@ -84,7 +84,7 @@ const CameraAnimator = ({
 
 type AtelierSceneProps = {
   activeView: ViewConfig;
-  autoRotate: boolean;
+  autoRotate?: boolean;
   transitionCount: number;
   hoveredPreset: Exclude<ViewPreset, "overview"> | null;
   onSelectPreset: (preset: ViewPreset) => void;
@@ -94,7 +94,7 @@ type AtelierSceneProps = {
 
 export const AtelierScene = ({
   activeView,
-  autoRotate,
+  autoRotate = false,
   transitionCount,
   hoveredPreset,
   onSelectPreset,
