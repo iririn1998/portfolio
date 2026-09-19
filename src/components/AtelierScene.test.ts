@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import * as THREE from "three";
-import { HOTSPOTS, VIEW_PRESETS } from "../constants";
+import { CARD_INFOS, HOTSPOTS, VIEW_PRESETS } from "../constants";
 import { getPresetFromObject } from "../utils";
 
 describe("Camera & Preset Validation", () => {
@@ -166,5 +166,18 @@ describe("Hotspots & Object Click Detection", () => {
     expect(getPresetFromObject(bookshelfMesh)).toBe("bookshelf");
     expect(getPresetFromObject(plantLeaf)).toBe("window");
     expect(getPresetFromObject(randomMesh)).toBeNull();
+  });
+
+  it("should define valid CARD_INFOS for all view presets including overview", () => {
+    const presets = ["overview", "desk", "bookshelf", "window"] as const;
+    for (const id of presets) {
+      const card = CARD_INFOS[id];
+      expect(card).toBeDefined();
+      expect(card.id).toBe(id);
+      expect(card.label).toBeTruthy();
+      expect(card.subLabel).toBeTruthy();
+      expect(card.icon).toBeTruthy();
+      expect(card.description).toBeTruthy();
+    }
   });
 });
