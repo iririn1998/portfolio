@@ -2,14 +2,10 @@ import { useLoadingScreen } from "./hooks/useLoadingScreen";
 import styles from "./index.module.css";
 
 export const LoadingScreen = () => {
-  const { progress, visible, isLoaded } = useLoadingScreen();
-
-  if (!visible) {
-    return null;
-  }
+  const { progress } = useLoadingScreen();
 
   return (
-    <div className={`${styles.screen} ${isLoaded ? styles.loaded : ""}`}>
+    <div className={styles.screen} role="status" aria-live="polite">
       <div className={styles.spinner}>
         <div className={styles.spinnerRing} />
       </div>

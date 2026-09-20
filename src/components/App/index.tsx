@@ -1,3 +1,7 @@
+import { Suspense, use } from "react";
+import { useGLTF } from "@react-three/drei";
+import { ErrorBoundary } from "../ErrorBoundary";
+import { SceneErrorFallback } from "../SceneErrorFallback";
 import { AtelierScene } from "../AtelierScene";
 import { ConnectorLine } from "../ConnectorLine";
 import { InfoCard } from "../InfoCard";
@@ -5,7 +9,13 @@ import { LoadingScreen } from "../LoadingScreen";
 import { UIOverlay } from "../UIOverlay";
 import { useAtelierNavigation } from "./hooks/useAtelierNavigation";
 
-const App = () => {
+import { useMinimumLoadingTime } from "./hooks/useMinimumLoadingTime";
+
+const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void> }) => {
+  // Suspend before mounting the page; AtelierModel reuses the same GLTF cache.
+  useGLTF("/atelier.glb");
+  use(minimumLoadingTime);
+
   const {
     currentPreset,
     hoveredPreset,
@@ -21,8 +31,7 @@ const App = () => {
   } = useAtelierNavigation();
 
   return (
-    <main className="atelier-container">
-      <LoadingScreen />
+    <>
       <AtelierScene
         activeView={activeView}
         transitionCount={transitionCount}
@@ -49,6 +58,22 @@ const App = () => {
       />
 
       <UIOverlay currentPreset={currentPreset} onSelectPreset={handleSelectPreset} />
+    </>
+  );
+};
+
+const App = () => {
+  const minimumLoadingTime = useMinimumLoadingTime();
+
+  return (
+    <main className="atelier-container">
+      <ErrorBoundary
+        fallback={(error, reset) => <SceneErrorFallback error={error} onRetry={reset} />}
+      >
+        <Suspense fallback={<LoadingScreen />}>
+          <AtelierPage minimumLoadingTime={minimumLoadingTime} />
+        </Suspense>
+      </ErrorBoundary>
     </main>
   );
 };
