@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCardAnchorPosition } from "./hooks/useCardAnchorPosition";
 import type { CardInfo, ScreenPosition, ViewPreset } from "../../types";
 import styles from "./index.module.css";
 
@@ -17,25 +17,7 @@ export const InfoCard = ({
   onSelectPreset,
   onAnchorPosChange,
 }: InfoCardProps) => {
-  const anchorRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    const updateAnchor = () => {
-      if (anchorRef.current) {
-        const rect = anchorRef.current.getBoundingClientRect();
-        onAnchorPosChange({
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2,
-        });
-      }
-    };
-
-    updateAnchor();
-    window.addEventListener("resize", updateAnchor);
-    return () => {
-      window.removeEventListener("resize", updateAnchor);
-    };
-  }, [onAnchorPosChange]);
+  const anchorRef = useCardAnchorPosition(onAnchorPosChange);
 
   const isCurrentView = currentPreset === cardInfo.id;
   const isOverview = cardInfo.id === "overview";
