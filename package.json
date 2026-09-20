@@ -38,6 +38,7 @@
     "eslint": "^10.11.0",
     "eslint-plugin-export-scope": "^3.1.0",
     "happy-dom": "^20.11.1",
+    "jiti": "^2.7.0",
     "oxfmt": "^0.61.0",
     "oxlint": "^1.75.0",
     "stylelint": "^17.15.0",

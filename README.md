@@ -67,6 +67,6 @@ pnpm dev
 - `hooks/` 内の hook は export の直前に `/** @scope .. */` を付け、所属するコンポーネントとその配下に公開します。他のコンポーネントからの直接 import は禁止します。
 - `App` の default export は `/** @scope ../.. */` により `src/main.tsx` から利用できます。
 
-VS Code では推奨拡張の ESLint をインストールし、TypeScript の「Use Workspace Version」を選択してください。`tsconfig.app.json` のプラグイン設定により、補完も公開範囲を考慮します。scope の変更が診断に反映されない場合は ESLint Server を再起動してください。
+VS Code では推奨拡張の ESLint をインストールし、TypeScript の「Use Workspace Version」を選択してください。`tsconfig.json` のプラグイン設定により、補完も公開範囲を考慮します。scope の変更が診断に反映されない場合は ESLint Server を再起動してください。
 
 互換性について: eslint-plugin-export-scope 3.1.0 の TypeScript peer dependency は `>=4.9 <6` です。このプロジェクトでは既存の TypeScript 6 を維持しているため、依存関係のインストール時に警告が出ます。導入時に lint の正常通過と範囲外 import の検出を確認していますが、TypeScript 6 はプラグインの公式対応範囲外です。
