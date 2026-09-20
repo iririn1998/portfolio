@@ -1,0 +1,118 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  pointer-events: auto;
+  background-color: rgb(236 232 225 / 80%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 440px;
+  max-width: 100%;
+  padding: 32px 28px;
+  text-align: center;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  color: #c93b2b;
+  background-color: rgb(201 59 43 / 10%);
+  border-radius: 50%;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+.content {
+  margin-bottom: 20px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #555b55;
+}
+
+.detail {
+  max-width: 380px;
+  padding: 6px 10px;
+  margin: 12px auto 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #7a3e36;
+  white-space: nowrap;
+  background: rgb(201 59 43 / 8%);
+  border-radius: 6px;
+}
+
+.retry-btn {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: var(--text-primary);
+  border: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.retry-btn:hover {
+  background: var(--accent);
+  box-shadow: 0 4px 14px rgb(210 140 90 / 35%);
+  transform: translateY(-1px);
+}
+
+.retry-btn:active {
+  transform: scale(0.97);
+}
+
+.btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (width <= 768px) {
+  .card {
+    padding: 24px 20px;
+  }
+}
