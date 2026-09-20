@@ -2,8 +2,8 @@ import type { ThreeEvent } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { useMemo } from "react";
 import * as THREE from "three";
-import type { ViewPreset } from "../types";
-import { getPresetFromObject } from "../utils";
+import type { ViewPreset } from "../../types";
+import { getPresetFromObject } from "../../utils";
 
 type AtelierModelProps = {
   onSelectPreset?: (preset: ViewPreset) => void;
