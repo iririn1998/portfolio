@@ -1,5 +1,5 @@
-import { VIEW_PRESETS } from "../constants";
-import type { ViewPreset } from "../types";
+import { VIEW_PRESETS } from "../../constants";
+import type { ViewPreset } from "../../types";
 
 type UIOverlayProps = {
   currentPreset: ViewPreset;
