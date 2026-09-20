@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import type { CardInfo, ScreenPosition, ViewPreset } from "../../types";
+import styles from "./index.module.css";
 
 type InfoCardProps = {
   cardInfo: CardInfo;
@@ -40,37 +41,34 @@ export const InfoCard = ({
   const isOverview = cardInfo.id === "overview";
 
   return (
-    <aside
-      className="info-card glass-card is-always-visible"
-      aria-label={`${cardInfo.label}の詳細情報`}
-    >
+    <aside className={styles.card} aria-label={`${cardInfo.label}の詳細情報`}>
       {/* Anchor point where connector dashed line attaches */}
-      <span ref={anchorRef} className={`info-card-anchor ${showConnector ? "is-active" : ""}`} />
+      <span ref={anchorRef} className={`${styles.anchor} ${showConnector ? styles.active : ""}`} />
 
-      <div className="info-card-content">
-        <div className="info-card-header">
-          <span className="info-card-icon">{cardInfo.icon}</span>
-          <div className="info-card-title-group">
-            <h2 className="info-card-title">{cardInfo.label}</h2>
-            <span className="info-card-sub">{cardInfo.subLabel}</span>
+      <div className={styles.content}>
+        <div className={styles.header}>
+          <span className={styles.icon}>{cardInfo.icon}</span>
+          <div className={styles.titleGroup}>
+            <h2 className={styles.title}>{cardInfo.label}</h2>
+            <span className={styles.sub}>{cardInfo.subLabel}</span>
           </div>
         </div>
 
-        <p className="info-card-desc">{cardInfo.description}</p>
+        <p className={styles.desc}>{cardInfo.description}</p>
 
         {isOverview ? (
-          <div className="info-card-guide">
-            <span className="info-card-guide-dot" />
+          <div className={styles.guide}>
+            <span className={styles.guideDot} />
             <span>空間内のピンにカーソルを合わせて探索</span>
           </div>
         ) : (
           <button
             type="button"
-            className={`info-card-zoom-btn ${isCurrentView ? "is-current" : ""}`}
+            className={`${styles.zoomBtn} ${isCurrentView ? styles.current : ""}`}
             onClick={() => onSelectPreset(cardInfo.id)}
           >
             <span>{isCurrentView ? "現在のフォーカス視点" : "視点をフォーカス"}</span>
-            <span className="info-card-btn-arrow">{isCurrentView ? "✓" : "→"}</span>
+            <span className={styles.btnArrow}>{isCurrentView ? "✓" : "→"}</span>
           </button>
         )}
       </div>
