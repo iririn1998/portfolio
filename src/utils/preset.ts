@@ -1,5 +1,5 @@
 import type * as THREE from "three";
-import type { ViewPreset } from "./types";
+import type { ViewPreset } from "../types";
 
 export const getPresetFromObject = (obj: THREE.Object3D): ViewPreset | null => {
   let curr: THREE.Object3D | null = obj;
