@@ -10,7 +10,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: var(--bg-canvas);
+  background: var(--bg-loading);
 }
 
 .spinner {
@@ -37,7 +37,7 @@
 .text {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text-primary);
+  color: #f4f1ec;
   letter-spacing: 0.04em;
 }
 
@@ -45,7 +45,7 @@
   width: 180px;
   height: 4px;
   overflow: hidden;
-  background: rgb(0 0 0 / 8%);
+  background: rgb(255 255 255 / 14%);
   border-radius: 4px;
 }
 

@@ -1,5 +1,6 @@
 :root {
   --bg-canvas: #ece8e1;
+  --bg-loading: #101112;
   --panel-bg: rgb(255 255 255 / 80%);
   --panel-border: rgb(255 255 255 / 60%);
   --text-primary: #2d312e;
@@ -30,4 +31,5 @@ body,
   width: 100%;
   height: 100%;
   overflow: hidden;
+  background: var(--bg-loading);
 }
