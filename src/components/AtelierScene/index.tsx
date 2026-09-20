@@ -3,11 +3,11 @@ import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { OrbitControls as OrbitControlsImpl } from "three/examples/jsm/controls/OrbitControls.js";
 import * as THREE from "three";
-import type { ScreenPosition, ViewConfig, ViewPreset } from "../types";
-import { AtelierModel } from "./AtelierModel";
-import { ErrorBoundary } from "./ErrorBoundary";
-import { Hotspots } from "./Hotspots";
-import { SceneErrorFallback } from "./SceneErrorFallback";
+import type { ScreenPosition, ViewConfig, ViewPreset } from "../../types";
+import { AtelierModel } from "../AtelierModel";
+import { ErrorBoundary } from "../ErrorBoundary";
+import { Hotspots } from "../Hotspots";
+import { SceneErrorFallback } from "../SceneErrorFallback";
 
 type CameraAnimatorProps = {
   activeView: ViewConfig;
