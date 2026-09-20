@@ -1,4 +1,4 @@
-import type { ScreenPosition } from "../types";
+import type { ScreenPosition } from "../../types";
 
 type ConnectorLineProps = {
   startPos: ScreenPosition | null;
