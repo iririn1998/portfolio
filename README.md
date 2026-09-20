@@ -12,6 +12,7 @@ React アプリケーションを素早く立ち上げるための、再利用�
 - React Compiler
 - Vitest + Happy DOM
 - Oxlint
+- Stylelint
 - Oxfmt
 - destyle.css
 - mise による Node.js / pnpm のバージョン管理
