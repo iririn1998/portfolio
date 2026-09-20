@@ -1,0 +1,59 @@
+.overlay {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  max-width: calc(100vw - 48px);
+  padding: 8px 10px;
+  overflow-x: auto;
+  pointer-events: auto;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.preset-btn {
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+  color: var(--text-primary);
+  background: rgb(0 0 0 / 4%);
+}
+
+.preset-btn.active {
+  color: #fff;
+  background: var(--text-primary);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 15%);
+}
+
+@media (width <= 768px) {
+  .overlay {
+    top: 16px;
+    right: 16px;
+    gap: 4px;
+    max-width: calc(100vw - 32px);
+    padding: 6px 8px;
+    border-radius: 12px;
+  }
+
+  .preset-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
