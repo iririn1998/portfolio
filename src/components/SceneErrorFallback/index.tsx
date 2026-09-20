@@ -1,6 +1,4 @@
-import * as THREE from "three";
-import { useGLTF } from "@react-three/drei";
-import { useCallback } from "react";
+import { useSceneRetry } from "./hooks/useSceneRetry";
 import styles from "./index.module.css";
 
 type SceneErrorFallbackProps = {
@@ -9,15 +7,7 @@ type SceneErrorFallbackProps = {
 };
 
 export const SceneErrorFallback = ({ error, onRetry }: SceneErrorFallbackProps) => {
-  const handleRetry = useCallback(() => {
-    try {
-      useGLTF.clear("/atelier.glb");
-      THREE.Cache.clear();
-    } catch {
-      // Ignore cleanup error if already cleared
-    }
-    onRetry();
-  }, [onRetry]);
+  const handleRetry = useSceneRetry(onRetry);
 
   return (
     <div className={styles.overlay} role="alert">
