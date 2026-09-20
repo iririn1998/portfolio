@@ -1,5 +1,6 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
+import styles from "./index.module.css";
 
 export const LoadingScreen = () => {
   const { progress, active } = useProgress();
@@ -19,13 +20,13 @@ export const LoadingScreen = () => {
   }
 
   return (
-    <div className={`loading-screen ${!active && progress === 100 ? "loaded" : ""}`}>
-      <div className="spinner-container">
-        <div className="spinner-ring" />
+    <div className={`${styles.screen} ${!active && progress === 100 ? styles.loaded : ""}`}>
+      <div className={styles.spinner}>
+        <div className={styles.spinnerRing} />
       </div>
-      <div className="loading-text">Loading Atelier 3D Space...</div>
-      <div className="progress-bar-container">
-        <div className="progress-bar-fill" style={{ width: `${Math.round(progress)}%` }} />
+      <div className={styles.text}>Loading Atelier 3D Space...</div>
+      <div className={styles.progressBar}>
+        <div className={styles.progressBarFill} style={{ width: `${Math.round(progress)}%` }} />
       </div>
     </div>
   );
