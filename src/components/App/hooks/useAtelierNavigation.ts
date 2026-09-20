@@ -1,13 +1,8 @@
 import { useCallback, useState } from "react";
-import { AtelierScene } from "./components/AtelierScene";
-import { ConnectorLine } from "./components/ConnectorLine";
-import { InfoCard } from "./components/InfoCard";
-import { LoadingScreen } from "./components/LoadingScreen";
-import { UIOverlay } from "./components/UIOverlay";
-import { CARD_INFOS, VIEW_PRESETS } from "./constants";
-import type { ScreenPosition, ViewPreset } from "./types";
+import { CARD_INFOS, VIEW_PRESETS } from "../../../constants";
+import type { ScreenPosition, ViewPreset } from "../../../types";
 
-const App = () => {
+export const useAtelierNavigation = () => {
   const [currentPreset, setCurrentPreset] = useState<ViewPreset>("overview");
   const [cardPreset, setCardPreset] = useState<ViewPreset>("overview");
   const [transitionCount, setTransitionCount] = useState(0);
@@ -43,37 +38,17 @@ const App = () => {
     setCardAnchorPos(pos);
   }, []);
 
-  return (
-    <main className="atelier-container">
-      <LoadingScreen />
-      <AtelierScene
-        activeView={activeView}
-        transitionCount={transitionCount}
-        hoveredPreset={hoveredPreset}
-        onSelectPreset={handleSelectPreset}
-        onHoverPreset={handleHoverMarker}
-        onUpdateMarkerPos={handleUpdateMarkerPos}
-      />
-
-      {/* Dashed connector line between card anchor and hovered 3D marker */}
-      <ConnectorLine
-        startPos={cardAnchorPos}
-        endPos={markerScreenPos}
-        visible={Boolean(hoveredPreset)}
-      />
-
-      {/* Bottom-left information card: always visible */}
-      <InfoCard
-        cardInfo={activeCardInfo}
-        currentPreset={currentPreset}
-        showConnector={Boolean(hoveredPreset)}
-        onSelectPreset={handleSelectPreset}
-        onAnchorPosChange={handleAnchorPosChange}
-      />
-
-      <UIOverlay currentPreset={currentPreset} onSelectPreset={handleSelectPreset} />
-    </main>
-  );
+  return {
+    currentPreset,
+    hoveredPreset,
+    markerScreenPos,
+    cardAnchorPos,
+    activeView,
+    activeCardInfo,
+    transitionCount,
+    handleSelectPreset,
+    handleHoverMarker,
+    handleUpdateMarkerPos,
+    handleAnchorPosChange,
+  };
 };
-
-export default App;
