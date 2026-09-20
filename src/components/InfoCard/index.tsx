@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import type { CardInfo, ScreenPosition, ViewPreset } from "../types";
+import type { CardInfo, ScreenPosition, ViewPreset } from "../../types";
 
 type InfoCardProps = {
   cardInfo: CardInfo;
