@@ -10,6 +10,7 @@ import { UIOverlay } from "../UIOverlay";
 import { useAtelierNavigation } from "./hooks/useAtelierNavigation";
 
 import { useMinimumLoadingTime } from "./hooks/useMinimumLoadingTime";
+import styles from "./index.module.css";
 
 const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void> }) => {
   // Suspend before mounting the page; AtelierModel reuses the same GLTF cache.
@@ -31,7 +32,7 @@ const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void>
   } = useAtelierNavigation();
 
   return (
-    <>
+    <div className={styles.pageReveal}>
       <AtelierScene
         activeView={activeView}
         transitionCount={transitionCount}
@@ -58,7 +59,7 @@ const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void>
       />
 
       <UIOverlay currentPreset={currentPreset} onSelectPreset={handleSelectPreset} />
-    </>
+    </div>
   );
 };
 
