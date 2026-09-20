@@ -8,6 +8,7 @@ import { AtelierModel } from "../AtelierModel";
 import { ErrorBoundary } from "../ErrorBoundary";
 import { Hotspots } from "../Hotspots";
 import { SceneErrorFallback } from "../SceneErrorFallback";
+import styles from "./index.module.css";
 
 type CameraAnimatorProps = {
   activeView: ViewConfig;
@@ -120,7 +121,7 @@ export const AtelierScene = ({
   }, []);
 
   return (
-    <div className="canvas-wrapper">
+    <div className={styles.canvasWrapper}>
       <ErrorBoundary
         key={retryKey}
         fallback={(error, reset) => (
