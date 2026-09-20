@@ -492,6 +492,114 @@ body,
   fill: #1e221f;
 }
 
+/* 3D Scene Error Fallback */
+.scene-error-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 24px;
+  pointer-events: auto;
+  background-color: rgb(236 232 225 / 80%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.scene-error-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 440px;
+  max-width: 100%;
+  padding: 32px 28px;
+  text-align: center;
+}
+
+.scene-error-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  color: #c93b2b;
+  background-color: rgb(201 59 43 / 10%);
+  border-radius: 50%;
+}
+
+.scene-error-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.scene-error-content {
+  margin-bottom: 20px;
+}
+
+.scene-error-title {
+  margin: 0 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.scene-error-desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #555b55;
+}
+
+.scene-error-detail {
+  max-width: 380px;
+  padding: 6px 10px;
+  margin: 12px auto 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #7a3e36;
+  white-space: nowrap;
+  background: rgb(201 59 43 / 8%);
+  border-radius: 6px;
+}
+
+.scene-error-retry-btn {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  background: var(--text-primary);
+  border: none;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.scene-error-retry-btn:hover {
+  background: var(--accent);
+  box-shadow: 0 4px 14px rgb(210 140 90 / 35%);
+  transform: translateY(-1px);
+}
+
+.scene-error-retry-btn:active {
+  transform: scale(0.97);
+}
+
+.scene-error-btn-icon {
+  width: 16px;
+  height: 16px;
+}
+
 @media (width <= 768px) {
   .controls-overlay {
     top: 16px;
@@ -514,5 +622,9 @@ body,
     width: auto;
     max-width: calc(100vw - 32px);
     padding: 16px 18px;
+  }
+
+  .scene-error-card {
+    padding: 24px 20px;
   }
 }
