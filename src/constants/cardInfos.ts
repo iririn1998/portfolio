@@ -7,30 +7,29 @@ export const CARD_INFOS: Record<ViewPreset, CardInfo> = {
     subLabel: "3D Workspace",
     icon: "🎨",
     description:
-      "デザインと開発を行う3Dアトリエ空間。空間内のピンにカーソルを合わせると各エリアの詳細が確認できます。",
+      "自己紹介・スキル・プロダクトを紹介する3Dアトリエ。デスクは自己紹介、本棚はスキル、植物はプロダクトに対応しています。空間内のピンにカーソルを合わせて探索できます。",
   },
   desk: {
     id: "desk",
-    label: "デスク",
-    subLabel: "Workspace",
+    label: "自己紹介",
+    subLabel: "About Me",
     icon: "💻",
     description:
-      "デュアル環境とエルゴノミクス設計のデスク。コード設計やデザイン制作を行うメイン作業環境です。",
+      "デスクは自己紹介のエリア。プロフィールやこれまでの歩み、ものづくりで大切にしていることを紹介します。",
   },
   bookshelf: {
     id: "bookshelf",
-    label: "本棚",
-    subLabel: "Library",
+    label: "スキル",
+    subLabel: "Skills",
     icon: "📚",
-    description:
-      "デザイン書・技術書・アートブックが並ぶ本棚。アイデアや知見をストックするインスピレーションの源です。",
+    description: "本棚はスキルのエリア。開発やデザインで使う技術・ツール、得意分野を紹介します。",
   },
   window: {
     id: "window",
-    label: "観葉植物",
-    subLabel: "Greenery",
+    label: "プロダクト",
+    subLabel: "Products",
     icon: "🪴",
     description:
-      "柔らかな自然光が差し込むアトリエの窓辺。観葉植物がデスク周りに安らぎと心地よい集中をもたらします。",
+      "植物はプロダクトのエリア。これまでに制作したプロダクトや、制作の背景・工夫を紹介します。",
   },
 };
