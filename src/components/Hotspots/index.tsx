@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import * as THREE from "three";
 import { HOTSPOTS } from "../../constants";
 import type { ScreenPosition, ViewPreset } from "../../types";
+import styles from "./index.module.css";
 
 type HotspotsProps = {
   currentPreset: ViewPreset;
@@ -63,11 +64,11 @@ export const Hotspots = ({
               center
               distanceFactor={8}
               zIndexRange={[15, 0]}
-              className={`hotspot-marker-wrap ${isCurrentFocus ? "is-focused" : ""} ${isHovered ? "is-hovered" : ""}`}
+              className={`${styles.markerWrap} ${isCurrentFocus ? styles.focused : ""} ${isHovered ? styles.hovered : ""}`}
             >
               <button
                 type="button"
-                className="hotspot-pin-btn"
+                className={styles.pinBtn}
                 onClick={(e) => {
                   e.stopPropagation();
                   onSelectPreset(spot.id);
@@ -78,13 +79,13 @@ export const Hotspots = ({
                 title={`${spot.label} (クリックでフォーカス)`}
               >
                 {/* Ripple animation rings */}
-                <span className="hotspot-pin-ripple ripple-1" />
-                <span className="hotspot-pin-ripple ripple-2" />
+                <span className={styles.pinRipple} />
+                <span className={`${styles.pinRipple} ${styles.rippleDelay}`} />
 
                 {/* Minimalist icon pin badge (no text) */}
-                <span className="hotspot-pin-badge">
-                  <span className="hotspot-pin-core-dot" />
-                  <span className="hotspot-pin-icon">{spot.icon}</span>
+                <span className={styles.pinBadge}>
+                  <span className={styles.coreDot} />
+                  <span className={styles.pinIcon}>{spot.icon}</span>
                 </span>
               </button>
             </Html>
