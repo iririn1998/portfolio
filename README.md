@@ -12,6 +12,7 @@ React アプリケーションを素早く立ち上げるための、再利用�
 - React Compiler
 - Vitest + Happy DOM
 - Oxlint
+- ESLint + eslint-plugin-export-scope（export の公開範囲の検査）
 - Stylelint
 - Oxfmt
 - destyle.css
@@ -54,3 +55,18 @@ pnpm dev
 ```
 
 ターミナルに表示された URL をブラウザで開いてください。
+
+## export の公開範囲
+
+`pnpm lint` / `pnpm lint:js` は Oxlint に加えて ESLint の export-scope ルールを実行します。公開範囲だけを確認する場合は `pnpm lint:scope` を使います。ESLint の対象は `src` 配下の TypeScript / TSX です。
+
+[eslint-plugin-export-scope](https://github.com/A-Shleifman/eslint-plugin-export-scope) のデフォルトを利用し、通常のファイルは同じディレクトリとその配下、`index.ts` / `index.tsx` は親ディレクトリとその配下からの import を許可します。
+
+- `constants`・`types`・`utils` は `index.ts` 経由で参照してください。外部から内部ファイルを直接 import するとエラーになります。
+- コンポーネントは `src/components/<ComponentName>/index.tsx` を公開入口にします。
+- `hooks/` 内の hook は export の直前に `/** @scope .. */` を付け、所属するコンポーネントとその配下に公開します。他のコンポーネントからの直接 import は禁止します。
+- `App` の default export は `/** @scope ../.. */` により `src/main.tsx` から利用できます。
+
+VS Code では推奨拡張の ESLint をインストールし、TypeScript の「Use Workspace Version」を選択してください。`tsconfig.app.json` のプラグイン設定により、補完も公開範囲を考慮します。scope の変更が診断に反映されない場合は ESLint Server を再起動してください。
+
+互換性について: eslint-plugin-export-scope 3.1.0 の TypeScript peer dependency は `>=4.9 <6` です。このプロジェクトでは既存の TypeScript 6 を維持しているため、依存関係のインストール時に警告が出ます。導入時に lint の正常通過と範囲外 import の検出を確認していますが、TypeScript 6 はプラグインの公式対応範囲外です。
