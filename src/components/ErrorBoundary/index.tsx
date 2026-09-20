@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type ReactNode } from "react";
+import styles from "./index.module.css";
 
 export type ErrorBoundaryProps = {
   children: ReactNode;
@@ -49,10 +50,10 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
         return fallback;
       }
       return (
-        <div role="alert" style={{ padding: 24, color: "#d32f2f" }}>
-          <h2>Something went wrong.</h2>
-          <pre>{error.message}</pre>
-          <button type="button" onClick={this.reset}>
+        <div role="alert" className={styles.fallback}>
+          <h2 className={styles.title}>Something went wrong.</h2>
+          <pre className={styles.detail}>{error.message}</pre>
+          <button type="button" className={styles.retryBtn} onClick={this.reset}>
             Try again
           </button>
         </div>
