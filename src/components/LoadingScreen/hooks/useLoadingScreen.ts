@@ -1,6 +1,7 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect, useState } from "react";
 
+/** @scope .. */
 export const useLoadingScreen = () => {
   const { progress, active } = useProgress();
   const [visible, setVisible] = useState(true);

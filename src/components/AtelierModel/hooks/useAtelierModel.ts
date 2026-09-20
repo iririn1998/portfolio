@@ -5,6 +5,7 @@ import * as THREE from "three";
 import type { ViewPreset } from "../../../types";
 import { getPresetFromObject } from "../../../utils";
 
+/** @scope .. */
 export const useAtelierModel = (onSelectPreset?: (preset: ViewPreset) => void) => {
   const { scene } = useGLTF("/atelier.glb");
 

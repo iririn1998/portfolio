@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { CARD_INFOS, VIEW_PRESETS } from "../../../constants";
 import type { ScreenPosition, ViewPreset } from "../../../types";
 
+/** @scope .. */
 export const useAtelierNavigation = () => {
   const [currentPreset, setCurrentPreset] = useState<ViewPreset>("overview");
   const [cardPreset, setCardPreset] = useState<ViewPreset>("overview");

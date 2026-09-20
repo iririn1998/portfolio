@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import type { ScreenPosition } from "../../../types";
 
+/** @scope .. */
 export const useCardAnchorPosition = (onAnchorPosChange: (pos: ScreenPosition | null) => void) => {
   const anchorRef = useRef<HTMLSpanElement>(null);
 

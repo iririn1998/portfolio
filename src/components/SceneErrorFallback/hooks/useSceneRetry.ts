@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { useCallback } from "react";
 
+/** @scope .. */
 export const useSceneRetry = (onRetry: () => void) => {
   const handleRetry = useCallback(() => {
     try {

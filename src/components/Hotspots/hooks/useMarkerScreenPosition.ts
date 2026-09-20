@@ -4,6 +4,7 @@ import * as THREE from "three";
 import { HOTSPOTS } from "../../../constants";
 import type { ScreenPosition, ViewPreset } from "../../../types";
 
+/** @scope .. */
 export const useMarkerScreenPosition = (
   hoveredPreset: Exclude<ViewPreset, "overview"> | null,
   onUpdateMarkerPos: (pos: ScreenPosition | null) => void,

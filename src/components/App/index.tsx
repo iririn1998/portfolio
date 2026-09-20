@@ -53,4 +53,5 @@ const App = () => {
   );
 };
 
+/** @scope ../.. */
 export default App;

@@ -12,6 +12,7 @@ type CameraAnimationOptions = {
   onTransitionEnd: () => void;
 };
 
+/** @scope .. */
 export const useCameraAnimation = ({
   activeView,
   transitionCount,
