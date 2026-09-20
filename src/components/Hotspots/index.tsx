@@ -2,8 +2,8 @@ import { Html } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import * as THREE from "three";
-import { HOTSPOTS } from "../constants";
-import type { ScreenPosition, ViewPreset } from "../types";
+import { HOTSPOTS } from "../../constants";
+import type { ScreenPosition, ViewPreset } from "../../types";
 
 type HotspotsProps = {
   currentPreset: ViewPreset;
