@@ -1,4 +1,5 @@
 import type { ScreenPosition } from "../../types";
+import styles from "./index.module.css";
 
 type ConnectorLineProps = {
   startPos: ScreenPosition | null;
@@ -17,16 +18,16 @@ export const ConnectorLine = ({ startPos, endPos, visible }: ConnectorLineProps)
   const pathD = `M ${startPos.x} ${startPos.y} C ${ctrlX} ${startPos.y}, ${ctrlX} ${endPos.y}, ${endPos.x} ${endPos.y}`;
 
   return (
-    <svg className="connector-svg" aria-hidden="true">
+    <svg className={styles.svg} aria-hidden="true">
       {/* Dashed connecting line */}
-      <path d={pathD} className="connector-path" />
+      <path d={pathD} className={styles.path} />
 
       {/* Card anchor dot */}
-      <circle cx={startPos.x} cy={startPos.y} r="4" className="connector-anchor-dot" />
+      <circle cx={startPos.x} cy={startPos.y} r="4" className={styles.anchorDot} />
 
       {/* Marker target ring and dot */}
-      <circle cx={endPos.x} cy={endPos.y} r="6.5" className="connector-target-ring" />
-      <circle cx={endPos.x} cy={endPos.y} r="2.5" className="connector-target-dot" />
+      <circle cx={endPos.x} cy={endPos.y} r="6.5" className={styles.targetRing} />
+      <circle cx={endPos.x} cy={endPos.y} r="2.5" className={styles.targetDot} />
     </svg>
   );
 };

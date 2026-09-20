@@ -1,0 +1,43 @@
+.svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 15;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.path {
+  filter: drop-shadow(0 2px 6px rgb(255 255 255 / 70%));
+  fill: none;
+  stroke: #1e221f;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-dasharray: 6 5;
+  animation: dash 1.3s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -22;
+  }
+}
+
+.anchor-dot {
+  filter: drop-shadow(0 1px 4px rgb(0 0 0 / 25%));
+  fill: #1e221f;
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+
+.target-ring {
+  filter: drop-shadow(0 2px 6px rgb(0 0 0 / 20%));
+  fill: rgb(255 255 255 / 90%);
+  stroke: #1e221f;
+  stroke-width: 2;
+}
+
+.target-dot {
+  fill: #1e221f;
+}
