@@ -3,5 +3,8 @@
   "stylelint.validate": ["css"],
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit"
-  }
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "eslint.validate": ["typescript", "typescriptreact"]
 }

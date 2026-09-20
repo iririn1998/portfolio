@@ -6,6 +6,7 @@
     "module": "esnext",
     "types": ["vite/client", "vitest/globals"],
     "allowArbitraryExtensions": true,
+    "plugins": [{ "name": "eslint-plugin-export-scope" }],
     "skipLibCheck": true,
 
     /* Bundler mode */
