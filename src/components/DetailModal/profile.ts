@@ -4,11 +4,22 @@ export const profile = {
     {
       category: "FRONTEND",
       items: [
+        { name: "JavaScript", icon: "js" },
         { name: "TypeScript", icon: "ts" },
         { name: "React", icon: "react" },
         { name: "Next.js", icon: "nextjs" },
+        { name: "Vue", icon: "vue" },
+        { name: "Nuxt", icon: "nuxtjs" },
         { name: "HTML", icon: "html" },
         { name: "CSS", icon: "css" },
+      ],
+    },
+    {
+      category: "BACKEND & CLOUD",
+      items: [
+        { name: "Node.js", icon: "nodejs" },
+        { name: "Python", icon: "python" },
+        { name: "AWS", icon: "aws" },
       ],
     },
     {
