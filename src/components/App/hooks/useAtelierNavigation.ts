@@ -13,6 +13,8 @@ export const useAtelierNavigation = () => {
   const [markerScreenPos, setMarkerScreenPos] = useState<ScreenPosition | null>(null);
   const [cardAnchorPos, setCardAnchorPos] = useState<ScreenPosition | null>(null);
 
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
   const activeView = VIEW_PRESETS.find((v) => v.id === currentPreset) ?? VIEW_PRESETS[0];
   const activeCardInfo = CARD_INFOS[cardPreset] ?? CARD_INFOS.overview;
 
@@ -21,6 +23,14 @@ export const useAtelierNavigation = () => {
     setCardPreset(preset);
     setTransitionCount((prev) => prev + 1);
     setHoveredPreset(null);
+  }, []);
+
+  const handleOpenDetail = useCallback(() => {
+    setIsDetailOpen(true);
+  }, []);
+
+  const handleCloseDetail = useCallback(() => {
+    setIsDetailOpen(false);
   }, []);
 
   // Update card and line ONLY when hovering over 3D markers
@@ -41,12 +51,16 @@ export const useAtelierNavigation = () => {
 
   return {
     currentPreset,
+    cardPreset,
     hoveredPreset,
     markerScreenPos,
     cardAnchorPos,
     activeView,
     activeCardInfo,
     transitionCount,
+    isDetailOpen,
+    handleOpenDetail,
+    handleCloseDetail,
     handleSelectPreset,
     handleHoverMarker,
     handleUpdateMarkerPos,
