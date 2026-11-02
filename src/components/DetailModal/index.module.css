@@ -31,6 +31,15 @@
   animation: scale-up 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.closing {
+  pointer-events: none;
+  animation: fade-out 0.25s ease-in forwards;
+}
+
+.closing .dialog {
+  animation: scale-down 0.25s ease-in forwards;
+}
+
 .header {
   display: flex;
   align-items: center;
@@ -214,6 +223,26 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scale-down {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation: none;
   }
 }
 

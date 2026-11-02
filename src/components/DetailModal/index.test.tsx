@@ -7,6 +7,50 @@ import { DetailModal } from "./index";
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
 
 describe("DetailModal component", () => {
+  it("keeps the same content during exit and removes it after the animation", async () => {
+    vi.useFakeTimers();
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    const onClose = vi.fn();
+
+    try {
+      await act(async () => root.render(<DetailModal isOpen preset="desk" onClose={onClose} />));
+      await act(async () =>
+        root.render(<DetailModal isOpen={false} preset="bookshelf" onClose={onClose} />),
+      );
+      expect(container.textContent).toContain("自己紹介");
+      expect(container.querySelector('[aria-hidden="true"]')).not.toBeNull();
+      await act(async () => vi.advanceTimersByTimeAsync(250));
+      expect(container.innerHTML).toBe("");
+    } finally {
+      await act(async () => root.unmount());
+      vi.useRealTimers();
+    }
+  });
+
+  it("cancels the exit when reopened before it completes", async () => {
+    vi.useFakeTimers();
+    const container = document.createElement("div");
+    const root = createRoot(container);
+    const onClose = vi.fn();
+
+    try {
+      await act(async () => root.render(<DetailModal isOpen preset="desk" onClose={onClose} />));
+      await act(async () =>
+        root.render(<DetailModal isOpen={false} preset="desk" onClose={onClose} />),
+      );
+      await act(async () =>
+        root.render(<DetailModal isOpen preset="bookshelf" onClose={onClose} />),
+      );
+      await act(async () => vi.advanceTimersByTimeAsync(250));
+      expect(container.textContent).toContain("スキル");
+      expect(container.querySelector('[role="dialog"]')).not.toBeNull();
+    } finally {
+      await act(async () => root.unmount());
+      vi.useRealTimers();
+    }
+  });
+
   it("renders nothing when isOpen is false", async () => {
     const container = document.createElement("div");
     document.body.appendChild(container);

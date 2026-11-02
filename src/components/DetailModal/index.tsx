@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DETAIL_CONTENTS } from "../../constants";
 import type { DetailPreset, ViewPreset } from "../../types";
 import styles from "./index.module.css";
@@ -15,13 +15,36 @@ const resolveDetailPreset = (preset: ViewPreset): DetailPreset => {
 
 export const DetailModal = ({ isOpen, preset, onClose }: DetailModalProps) => {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const [isPresent, setIsPresent] = useState(isOpen);
+  const [displayPreset, setDisplayPreset] = useState(preset);
+
+  // Keep the closing content stable even if navigation changes the selected card.
+  if (isOpen && preset !== displayPreset) {
+    setDisplayPreset(preset);
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      setIsPresent(true);
+      return;
+    }
+
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setIsPresent(false);
+      return;
+    }
+
+    const timeout = window.setTimeout(() => setIsPresent(false), 250);
+    return () => window.clearTimeout(timeout);
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
       // Focus the close button for accessibility when modal opens
-      requestAnimationFrame(() => {
+      const frame = requestAnimationFrame(() => {
         closeButtonRef.current?.focus();
       });
+      return () => cancelAnimationFrame(frame);
     }
   }, [isOpen]);
 
@@ -42,14 +65,20 @@ export const DetailModal = ({ isOpen, preset, onClose }: DetailModalProps) => {
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) {
+  if (!isOpen && !isPresent) {
     return null;
   }
 
-  const detail = DETAIL_CONTENTS[resolveDetailPreset(preset)];
+  const detail = DETAIL_CONTENTS[resolveDetailPreset(displayPreset)];
 
   return (
-    <div className={styles.backdrop} onClick={onClose} role="presentation">
+    <div
+      className={`${styles.backdrop} ${!isOpen ? styles.closing : ""}`}
+      onClick={isOpen ? onClose : undefined}
+      role="presentation"
+      inert={!isOpen}
+      aria-hidden={!isOpen}
+    >
       <div
         className={styles.dialog}
         role="dialog"
