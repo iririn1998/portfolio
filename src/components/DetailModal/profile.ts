@@ -19,6 +19,10 @@ export const profile = {
       items: [
         { name: "Node.js", icon: "nodejs" },
         { name: "Python", icon: "python" },
+        { name: "Kotlin", icon: "kotlin" },
+        { name: "Java", icon: "java" },
+        { name: "Spring Boot", icon: "spring" },
+        { name: "Thymeleaf", icon: null },
         { name: "AWS", icon: "aws" },
       ],
     },
