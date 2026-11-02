@@ -22,17 +22,12 @@ export const profile = {
         { name: "Kotlin", icon: "kotlin" },
         { name: "Java", icon: "java" },
         { name: "Spring Boot", icon: "spring" },
-        { name: "Thymeleaf", icon: null },
         { name: "AWS", icon: "aws" },
       ],
     },
     {
       category: "CREATIVE",
-      items: [
-        { name: "Three.js", icon: "threejs" },
-        { name: "React Three Fiber", icon: null },
-        { name: "WebGL", icon: null },
-      ],
+      items: [{ name: "Three.js", icon: "threejs" }],
     },
     {
       category: "TOOLS",
