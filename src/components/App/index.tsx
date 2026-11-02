@@ -28,6 +28,7 @@ const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void>
     activeCardInfo,
     transitionCount,
     isDetailOpen,
+    detailPreset,
     handleOpenDetail,
     handleCloseDetail,
     handleSelectPreset,
@@ -65,7 +66,11 @@ const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void>
       <UIOverlay currentPreset={currentPreset} onSelectPreset={handleSelectPreset} />
 
       {/* Detailed information modal */}
-      <DetailModal isOpen={isDetailOpen} preset={cardPreset} onClose={handleCloseDetail} />
+      <DetailModal
+        isOpen={isDetailOpen}
+        preset={detailPreset ?? cardPreset}
+        onClose={handleCloseDetail}
+      />
     </div>
   );
 };
