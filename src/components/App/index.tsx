@@ -4,6 +4,7 @@ import { ErrorBoundary } from "../ErrorBoundary";
 import { SceneErrorFallback } from "../SceneErrorFallback";
 import { AtelierScene } from "../AtelierScene";
 import { ConnectorLine } from "../ConnectorLine";
+import { DetailModal } from "../DetailModal";
 import { InfoCard } from "../InfoCard";
 import { LoadingScreen } from "../LoadingScreen";
 import { UIOverlay } from "../UIOverlay";
@@ -19,12 +20,16 @@ const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void>
 
   const {
     currentPreset,
+    cardPreset,
     hoveredPreset,
     markerScreenPos,
     cardAnchorPos,
     activeView,
     activeCardInfo,
     transitionCount,
+    isDetailOpen,
+    handleOpenDetail,
+    handleCloseDetail,
     handleSelectPreset,
     handleHoverMarker,
     handleUpdateMarkerPos,
@@ -52,13 +57,15 @@ const AtelierPage = ({ minimumLoadingTime }: { minimumLoadingTime: Promise<void>
       {/* Bottom-left information card: always visible */}
       <InfoCard
         cardInfo={activeCardInfo}
-        currentPreset={currentPreset}
         showConnector={Boolean(hoveredPreset)}
-        onSelectPreset={handleSelectPreset}
+        onOpenDetail={handleOpenDetail}
         onAnchorPosChange={handleAnchorPosChange}
       />
 
       <UIOverlay currentPreset={currentPreset} onSelectPreset={handleSelectPreset} />
+
+      {/* Detailed information modal */}
+      <DetailModal isOpen={isDetailOpen} preset={cardPreset} onClose={handleCloseDetail} />
     </div>
   );
 };

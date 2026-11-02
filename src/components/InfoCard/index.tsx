@@ -1,25 +1,21 @@
 import { useCardAnchorPosition } from "./hooks/useCardAnchorPosition";
-import type { CardInfo, ScreenPosition, ViewPreset } from "../../types";
+import type { CardInfo, ScreenPosition } from "../../types";
 import styles from "./index.module.css";
 
 type InfoCardProps = {
   cardInfo: CardInfo;
-  currentPreset: ViewPreset;
   showConnector: boolean;
-  onSelectPreset: (preset: ViewPreset) => void;
+  onOpenDetail: () => void;
   onAnchorPosChange: (pos: ScreenPosition | null) => void;
 };
 
 export const InfoCard = ({
   cardInfo,
-  currentPreset,
   showConnector,
-  onSelectPreset,
+  onOpenDetail,
   onAnchorPosChange,
 }: InfoCardProps) => {
   const anchorRef = useCardAnchorPosition(onAnchorPosChange);
-
-  const isCurrentView = currentPreset === cardInfo.id;
   const isOverview = cardInfo.id === "overview";
 
   return (
@@ -44,13 +40,9 @@ export const InfoCard = ({
             <span>空間内のピンにカーソルを合わせて探索</span>
           </div>
         ) : (
-          <button
-            type="button"
-            className={`${styles.zoomBtn} ${isCurrentView ? styles.current : ""}`}
-            onClick={() => onSelectPreset(cardInfo.id)}
-          >
-            <span>{isCurrentView ? "現在のフォーカス視点" : "視点をフォーカス"}</span>
-            <span className={styles.btnArrow}>{isCurrentView ? "✓" : "→"}</span>
+          <button type="button" className={styles.detailBtn} onClick={onOpenDetail}>
+            <span>詳細を見る</span>
+            <span className={styles.btnArrow}>→</span>
           </button>
         )}
       </div>

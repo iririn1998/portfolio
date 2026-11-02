@@ -115,7 +115,7 @@
   border-radius: 50%;
 }
 
-.zoom-btn {
+.detail-btn {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -132,22 +132,14 @@
   transition: all 0.2s ease;
 }
 
-.zoom-btn:hover {
+.detail-btn:hover {
   background: var(--accent);
   box-shadow: 0 4px 14px rgb(210 140 90 / 35%);
   transform: translateY(-1px);
 }
 
-.zoom-btn.current {
-  color: var(--text-primary);
-  cursor: default;
-  background: rgb(45 49 46 / 8%);
-}
-
-.zoom-btn.current:hover {
-  background: rgb(45 49 46 / 8%);
-  box-shadow: none;
-  transform: none;
+.detail-btn:active {
+  transform: translateY(0);
 }
 
 .btn-arrow {
@@ -155,7 +147,7 @@
   transition: transform 0.2s ease;
 }
 
-.zoom-btn:hover:not(.current) .btn-arrow {
+.detail-btn:hover .btn-arrow {
   transform: translateX(3px);
 }
 
