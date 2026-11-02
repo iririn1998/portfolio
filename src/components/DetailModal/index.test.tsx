@@ -97,7 +97,7 @@ describe("DetailModal component", () => {
     container.remove();
   });
 
-  it("closes when ESC key is pressed", async () => {
+  it("focuses the close button on opening and reopening and closes on Escape", async () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
     const root = createRoot(container);
@@ -107,11 +107,22 @@ describe("DetailModal component", () => {
       root.render(<DetailModal isOpen={true} preset="desk" onClose={onClose} />);
     });
 
+    const closeButton = container.querySelector<HTMLButtonElement>('button[aria-label="閉じる"]');
+    expect(document.activeElement).toBe(closeButton);
+
     await act(async () => {
-      window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+      closeButton?.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
     });
 
     expect(onClose).toHaveBeenCalledTimes(1);
+
+    await act(async () => {
+      root.render(<DetailModal isOpen={false} preset="desk" onClose={onClose} />);
+    });
+    await act(async () => {
+      root.render(<DetailModal isOpen={true} preset="desk" onClose={onClose} />);
+    });
+    expect(document.activeElement).toBe(container.querySelector('button[aria-label="閉じる"]'));
 
     await act(async () => {
       root.unmount();

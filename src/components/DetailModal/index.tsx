@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { DETAIL_CONTENTS } from "../../constants";
 import type { DetailPreset, ViewPreset } from "../../types";
 import styles from "./index.module.css";
@@ -14,7 +14,6 @@ const resolveDetailPreset = (preset: ViewPreset): DetailPreset => {
 };
 
 export const DetailModal = ({ isOpen, preset, onClose }: DetailModalProps) => {
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isPresent, setIsPresent] = useState(isOpen);
   const [displayPreset, setDisplayPreset] = useState(preset);
 
@@ -38,33 +37,6 @@ export const DetailModal = ({ isOpen, preset, onClose }: DetailModalProps) => {
     return () => window.clearTimeout(timeout);
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      // Focus the close button for accessibility when modal opens
-      const frame = requestAnimationFrame(() => {
-        closeButtonRef.current?.focus();
-      });
-      return () => cancelAnimationFrame(frame);
-    }
-  }, [isOpen]);
-
-  // Handle ESC key press
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        e.preventDefault();
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
   if (!isOpen && !isPresent) {
     return null;
   }
@@ -85,6 +57,12 @@ export const DetailModal = ({ isOpen, preset, onClose }: DetailModalProps) => {
         aria-modal="true"
         aria-labelledby="detail-modal-title"
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => {
+          if (isOpen && e.key === "Escape") {
+            e.preventDefault();
+            onClose();
+          }
+        }}
       >
         <header className={styles.header}>
           <div className={styles.headerLeft}>
@@ -97,8 +75,9 @@ export const DetailModal = ({ isOpen, preset, onClose }: DetailModalProps) => {
             </div>
           </div>
           <button
-            ref={closeButtonRef}
+            key={isOpen ? "open" : "closed"}
             type="button"
+            autoFocus={isOpen}
             className={styles.closeBtn}
             onClick={onClose}
             aria-label="閉じる"
