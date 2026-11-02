@@ -1,6 +1,7 @@
-import type { HotspotConfig } from "./types";
-import { CARD_INFOS } from "../../../../../constants";
+import type { HotspotConfig } from "../types/hotspot";
+import { CARD_INFOS } from "../../../../../../constants";
 
+/** @scope .. */
 export const HOTSPOTS: HotspotConfig[] = [
   {
     id: "desk",

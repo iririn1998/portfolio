@@ -1,4 +1,4 @@
-import type { DetailData, DetailItem } from "../types";
+import type { DetailData, DetailItem } from "../types/detail";
 import styles from "../index.module.css";
 
 type ItemCardProps = {

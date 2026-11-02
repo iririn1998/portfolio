@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import type { DetailData } from "../types";
+import type { DetailData } from "../types/detail";
 import styles from "../index.module.css";
-import { profile } from "../profile";
+import { profile } from "../constants/profile";
 
 type ProfileSectionProps = {
   label: string;

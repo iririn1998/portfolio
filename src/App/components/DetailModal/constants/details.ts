@@ -1,6 +1,7 @@
-import type { DetailPreset } from "../../../types";
-import type { DetailData } from "./types";
+import type { DetailPreset } from "../../../../types";
+import type { DetailData } from "../types/detail";
 
+/** @scope .. */
 export const DETAIL_CONTENTS: Record<DetailPreset, DetailData> = {
   desk: {
     id: "desk",

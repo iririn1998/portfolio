@@ -1,5 +1,6 @@
-import type { ViewPreset } from "../../../../../types";
+import type { ViewPreset } from "../../../../../../types";
 
+/** @scope .. */
 export type HotspotConfig = {
   id: Exclude<ViewPreset, "overview">;
   label: string;

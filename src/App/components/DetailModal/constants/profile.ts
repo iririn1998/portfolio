@@ -1,4 +1,5 @@
 // 実際の経歴とプロフィール URL をここに追加してください。
+/** @scope .. */
 export const profile = {
   skills: [
     {

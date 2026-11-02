@@ -1,4 +1,4 @@
-import type { DetailData } from "../types";
+import type { DetailData } from "../types/detail";
 import styles from "../index.module.css";
 
 type DetailHeaderProps = {

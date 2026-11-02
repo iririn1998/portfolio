@@ -3,7 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import { useCallback, useMemo } from "react";
 import * as THREE from "three";
 import type { ViewPreset } from "../../../../../../types";
-import { getPresetFromObject } from "../preset";
+import { getPresetFromObject } from "../utils/preset";
 
 /** @scope .. */
 export const useAtelierModel = (onSelectPreset?: (preset: ViewPreset) => void) => {

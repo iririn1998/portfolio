@@ -1,7 +1,7 @@
 import { Html } from "@react-three/drei";
 import { PinButton } from "./components/PinButton";
 import { useMarkerScreenPosition } from "./hooks/useMarkerScreenPosition";
-import { HOTSPOTS } from "./hotspots";
+import { HOTSPOTS } from "./constants/hotspots";
 import type { ScreenPosition, ViewPreset } from "../../../../../types";
 import styles from "./index.module.css";
 

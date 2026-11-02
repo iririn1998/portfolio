@@ -64,7 +64,7 @@ pnpm dev
 
 - `constants`・`types` は `index.ts` 経由で参照してください。外部から内部ファイルを直接 import するとエラーになります。ここには複数のコンポーネントで共有するものだけを置きます。
 - コンポーネントは `<ComponentName>/index.tsx` を公開入口にし、利用する親コンポーネントの `components/` 配下に置きます（例: `src/App/components/AtelierScene/components/Hotspots`）。コンポーネントの export の直前に `/** @scope ../.. */` を付け、親コンポーネントとその配下にだけ公開します（`index.tsx` のデフォルトの公開範囲は `components/` までで、親コンポーネントから import できないため）。
-- 1 つのコンポーネントでしか使わない定数・型・関数は、そのコンポーネントのディレクトリに置きます（例: `DetailModal/details.ts`・`DetailModal/types.ts`）。
+- 1 つのコンポーネントでしか使わない定数・型・関数は、そのコンポーネントの `constants/`・`types/`・`utils/` に置き（例: `DetailModal/constants/details.ts`・`DetailModal/types/detail.ts`）、hook と同じく export の直前に `/** @scope .. */` を付けます。
 - 複数のコンポーネントで使うようになったら、それらの共通の親の `components/` まで引き上げます。
 - `hooks/` 内の hook は export の直前に `/** @scope .. */` を付け、所属するコンポーネントとその配下に公開します。他のコンポーネントからの直接 import は禁止します。
 - ルートコンポーネントは `src/App/index.tsx` で、デフォルトの公開範囲のまま `src/main.tsx` から利用できます。

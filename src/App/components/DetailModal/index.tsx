@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DETAIL_CONTENTS } from "./details";
+import { DETAIL_CONTENTS } from "./constants/details";
 import type { DetailPreset, ViewPreset } from "../../../types";
 import { DetailBody } from "./components/DetailBody";
 import { DetailHeader } from "./components/DetailHeader";

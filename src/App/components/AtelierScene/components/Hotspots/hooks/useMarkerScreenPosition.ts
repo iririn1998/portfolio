@@ -1,7 +1,7 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { useMemo } from "react";
 import * as THREE from "three";
-import { HOTSPOTS } from "../hotspots";
+import { HOTSPOTS } from "../constants/hotspots";
 import type { ScreenPosition, ViewPreset } from "../../../../../../types";
 
 /** @scope .. */

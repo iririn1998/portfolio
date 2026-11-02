@@ -1,4 +1,4 @@
-import type { HotspotConfig } from "../types";
+import type { HotspotConfig } from "../types/hotspot";
 import styles from "../index.module.css";
 
 type PinButtonProps = {
