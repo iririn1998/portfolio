@@ -15,5 +15,6 @@ export default defineConfig({
     "typescript/consistent-type-definitions": ["error", "type"],
     "react/rules-of-hooks": "error",
     "react/only-export-components": ["warn", { allowConstantExport: true }],
+    "react/jsx-max-depth": ["error", { max: 4 }],
   },
 });
