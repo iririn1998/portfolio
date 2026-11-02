@@ -4,7 +4,7 @@
     "target": "es2023",
     "lib": ["ES2023", "DOM"],
     "module": "esnext",
-    "types": ["vite/client", "vitest/globals", "node"],
+    "types": ["vite-plugin-svgr/client", "vite/client", "vitest/globals", "node"],
     "allowArbitraryExtensions": true,
     "plugins": [{ "name": "eslint-plugin-export-scope" }],
     "skipLibCheck": true,
