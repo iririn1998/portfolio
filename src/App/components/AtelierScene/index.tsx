@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
-import type { ScreenPosition, ViewConfig, ViewPreset } from "../../../types";
+import type { DetailPreset, ViewConfig, ViewPreset } from "../../../types";
 import { useAtelierScene } from "./hooks/useAtelierScene";
 import { CameraAnimator } from "./components/CameraAnimator";
 import { AtelierModel } from "./components/AtelierModel";
@@ -12,10 +12,8 @@ type AtelierSceneProps = {
   activeView: ViewConfig;
   autoRotate?: boolean;
   transitionCount: number;
-  hoveredPreset: Exclude<ViewPreset, "overview"> | null;
   onSelectPreset: (preset: ViewPreset) => void;
-  onHoverPreset: (preset: Exclude<ViewPreset, "overview"> | null) => void;
-  onUpdateMarkerPos: (pos: ScreenPosition | null) => void;
+  onOpenDetail: (preset: DetailPreset) => void;
 };
 
 /** @scope ../.. */
@@ -23,10 +21,8 @@ export const AtelierScene = ({
   activeView,
   autoRotate = false,
   transitionCount,
-  hoveredPreset,
   onSelectPreset,
-  onHoverPreset,
-  onUpdateMarkerPos,
+  onOpenDetail,
 }: AtelierSceneProps) => {
   const { isTransitioning, initialTarget, handleTransitionStart, handleTransitionEnd } =
     useAtelierScene(activeView);
@@ -82,10 +78,8 @@ export const AtelierScene = ({
         {/* 3D Clickable Hotspots */}
         <Hotspots
           currentPreset={activeView.id}
-          hoveredPreset={hoveredPreset}
           onSelectPreset={onSelectPreset}
-          onHoverPreset={onHoverPreset}
-          onUpdateMarkerPos={onUpdateMarkerPos}
+          onOpenDetail={onOpenDetail}
         />
 
         {/* Contact shadow right under the diorama plinth */}

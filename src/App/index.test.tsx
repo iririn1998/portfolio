@@ -9,9 +9,7 @@ vi.mock("@react-three/drei", () => ({
   useProgress: () => ({ progress: 100 }),
 }));
 vi.mock("./components/AtelierScene", () => ({ AtelierScene: () => <div>3D scene</div> }));
-vi.mock("./components/InfoCard", () => ({ InfoCard: () => <div>Information card</div> }));
 vi.mock("./components/UIOverlay", () => ({ UIOverlay: () => <div>Navigation</div> }));
-vi.mock("./components/ConnectorLine", () => ({ ConnectorLine: () => null }));
 
 // @ts-expect-error react act environment flag
 globalThis.IS_REACT_ACT_ENVIRONMENT = true;
@@ -40,7 +38,6 @@ it("keeps the entire page suspended until the model resolves, even at 100% progr
 
   expect(container.querySelector('[role="status"]')).not.toBeNull();
   expect(container.textContent).not.toContain("3D scene");
-  expect(container.textContent).not.toContain("Information card");
   expect(container.textContent).not.toContain("Navigation");
 
   await act(async () => vi.advanceTimersByTimeAsync(2000));
@@ -53,7 +50,6 @@ it("keeps the entire page suspended until the model resolves, even at 100% progr
   });
   expect(container.querySelector('[role="status"]')).toBeNull();
   expect(container.textContent).toContain("3D scene");
-  expect(container.textContent).toContain("Information card");
   expect(container.textContent).toContain("Navigation");
 });
 

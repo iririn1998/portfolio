@@ -13,6 +13,7 @@ describe("Hotspots", () => {
       expect(spot.subLabel).toBeTruthy();
       expect(spot.description).toBeTruthy();
       expect(spot.icon).toBeTruthy();
+      expect(spot.detailHint).toBeTruthy();
       expect(spot.position).toHaveLength(3);
     }
   });

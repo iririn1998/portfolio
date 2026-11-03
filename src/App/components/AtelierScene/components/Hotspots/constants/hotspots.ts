@@ -9,6 +9,7 @@ export const HOTSPOTS: HotspotConfig[] = [
     subLabel: CARD_INFOS.desk.subLabel,
     icon: CARD_INFOS.desk.icon,
     description: CARD_INFOS.desk.description,
+    detailHint: "プロフィール・経歴・リンク",
     position: [0.3, 1.85, -0.65],
   },
   {
@@ -17,6 +18,7 @@ export const HOTSPOTS: HotspotConfig[] = [
     subLabel: CARD_INFOS.bookshelf.subLabel,
     icon: CARD_INFOS.bookshelf.icon,
     description: CARD_INFOS.bookshelf.description,
+    detailHint: "技術スタックと開発ツール",
     position: [-1.45, 1.45, -0.1],
   },
   {
@@ -25,6 +27,7 @@ export const HOTSPOTS: HotspotConfig[] = [
     subLabel: CARD_INFOS.window.subLabel,
     icon: CARD_INFOS.window.icon,
     description: CARD_INFOS.window.description,
+    detailHint: "制作実績とプロジェクト",
     position: [-1.05, 1.15, 1.05],
   },
 ];

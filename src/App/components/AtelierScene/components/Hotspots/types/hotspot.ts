@@ -7,5 +7,7 @@ export type HotspotConfig = {
   subLabel: string;
   icon: string;
   description: string;
+  /** What the detail modal shows, displayed under the detail button label. */
+  detailHint: string;
   position: [number, number, number];
 };
